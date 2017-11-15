@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <title>
+    
+    </title>
+    <head>
+    
+    </head>
+    <body>
+        <div id="userInputDiv" class="lists"> <!--Where our list will appear-->
+        <p id="demo"></p> <!--Will explain to user what to do-->
+        <input id=userInput type="text"> <!--Where the user will write responses-->
+        <button id="buttonOne" type="button">Next</button> <!--Where user will input responses-->
+        </div>
+        
+        <div class="lists" id="userListDiv"></div> <!--Where the finished list will appear-->
+        
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> <!--References the online jQuery database-->
+        <script> // Begins our Javascript for the HTML above
+    
+        $(document).ready(function() // Tells server to load page before applying Javascript
+        {
+            var prompts = [
+            'What is this list of',
+            'Type your first option',
+            'Type your second option',
+            'Type your third option'
+            ]; // Will be generated in each step to inform users information to       input
+            
+       var answers =[]; //Provides a place to store the users answers
+            
+       var currentPrompt = 0; // Tells HTML to start with 'What is this of' when                           page is loaded
+            //
+         $('#userListDiv').hide(); // Informs HTML to hide the list the user is                              generating  
+        
+        $('#demo').html(prompts[0]); //Tells HTML to insert 'what is this list                                  of' into p tag
+            
+        $('#buttonOne').on('click', function () // Informs HTML that when the                                              button is clicked to do the                                              following
+        {   
+            if (currentPrompt < 4) // If current prompt is less than 'Type your                           third option'
+            {
+                answers[currentPrompt] = $('#userInput').val(); 
+                // The answer will be the current prompt; 'What is this list of' in this case and whatever the user has put in the input field created in HTML
+            $('#userInput').val(''); // Informs HTML to take the value inserted                             by user and store it
+            $('#demo').html(prompts[currentPrompt + 1]); // Tells page to make p                                                 tag equal the next                                                   prompt
+            currentPrompt = currentPrompt + 1; // Tells Javascript to move onto                                       the next prompt
+            if (currentPrompt === 4) {
+           $('#userListDiv').show();
+            $('#userInputDiv').hide(); // Tells HTML to show the users list and                               hide the input div when we click a                                   fourth time
+                
+            $('#userListDiv').html("<li>" + answers[0] +"<ol><li>" +answers[1]+ "</li><li>" +answers[2]+ "</li><li>" +answers[3]+ "</li></ol></li>"); 
+                // Inserts into html a list item with the first answer from the user, then the start of an ordered list with the first list item being the second user answer, then the end of that list item and start of another list item with the users third answer, then the end of that list item and the start of a new list item with the users fourth answer and then the end of that list item, the ordered list and the first list item 
+        
+            } //end of our second if statement
+                } //end of our first if statement
+                    }); //end of our button function      
+                        }); //end of our .ready function                        
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+    <title>
+    
+    </title>
+    <head>
+    
+    </head>
+    <body>
+        <div id="userInputDiv" class="lists"> <!--Where our list will appear-->
+        <p id="demo"></p> <!--Will explain to user what to do-->
+        <input id="userInput" type="text"> <!--Where the user will write responses-->
+        <button id="buttonOne" type="button">Next</button> <!--Where user will input responses-->
+        </div>
+        
+        <div class="lists" id="userListDiv"></div> <!--Where the finished list will appear-->
+               
+        
+         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> <!--References the online jQuery database-->
+        
+        
+        <script>
+             $(document).ready(function(){
+                          
+            var prompts = [
+            'what is this a list of?',
+            'Type your first option',
+            'Type your second option',
+            'Type your third option'
+            ]; 
+                 
+            var answers = [];
+            var currentPrompt = 0;
+            $('#userListDiv').hide();
+            
+            $('#demo').html(prompts[0]); 
+                 
+            $('#buttonOne').on('click', function (){   
+            
+            if (currentPrompt < 4)
+                {
+                 answers[currentPrompt] = $('#userInput').val(); 
+                
+                 $('#demo').html(prompts[currentPrompt + 1]);
+                
+                 currentPrompt = currentPrompt + 1;
+                    $('#userInput').val('');
+                    
+                if (currentPrompt === 4) 
+                {
+                    
+                    $('#userListDiv').show();
+                    $('#userInputDiv').hide(); // Tells HTML to show the users list and                               hide the input div when we click a                                   fourth time
+                
+                    $('#userListDiv').html("<li>" + answers[0] +"<ol><li>" +answers[1]+ "</li><li>" +answers[2]+ "</li><li>" +answers[3]+ "</li></ol></li>"); 
+                // Inserts into 
+                }
+                    
+            }})     
+                 
+                 
+                 
+            }); // Tells server to load page before applying Javascript
+            
+        </script> 
+        
+        
+        
+    </body>
+    </html>
